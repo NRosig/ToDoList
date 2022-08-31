@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "./todoApp.css";
 import Todo2 from "./todo";
+import { motion } from "framer-motion";
 
 
 const ToDo = () => {
@@ -40,13 +41,27 @@ const ToDo = () => {
 
   return (
   <div className="todoContainer">
+    <motion.h1 
+    className="titulo"
+    dragConstraints={{ left: -10, right: 10, top: 0, bottom: 0 }}
+    drag="x"
+    whileTap={{scale: 1.5}}
+    initial={{ scale: .8}}
+    animate={{scale: 2}}
+    transition={{duration: .4}}
+    >todos</motion.h1>
     <form className="todoCreateForm" onSubmit={handleSubmit}>
-      <input onChange={handleChange}  className="todoInput" value= {title}/>
-      <input 
+      <motion.input 
+        onChange={handleChange} 
+        className="todoInput" 
+        value= {title}
+        whileFocus= {{scale: 1.1}}/>
+      <motion.input 
         onClick={handleSubmit} 
         type="submit" 
         value="Create ToDo" 
-        className="buttonCreate" />
+        className="buttonCreate" 
+        whileHover={{scale: 1.1}}/>
     </form>
     <div className="toDosContainer">
       {toDos.map((item) => (
